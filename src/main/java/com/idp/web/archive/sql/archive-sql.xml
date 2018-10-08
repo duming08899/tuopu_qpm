@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idp.web.archive.dao.ArchiveDao">
+
+	<parameterMap id="parameterMap" type="com.idp.web.archive.entity.Archive"></parameterMap>
+	<resultMap id="resultMap" type="com.idp.web.archive.entity.Archive">
+		<result property="id" column="id"/>
+		<result property="arCode" column="ar_code"/>
+		<result property="arName" column="ar_name"/>
+		<result property="arPinyin" column="ar_pinyin"/>
+		<result property="createUser" column="create_user"/>
+		<result property="createDate" column="create_date"/>
+		<result property="updateUser" column="update_user"/>
+		<result property="updateDate" column="update_date"/>
+		<result property="isDeleted" column="is_deleted"/>
+		<result property="status" column="status"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.ar_code,
+			t.ar_name,
+			t.ar_pinyin,
+			t.create_user,
+			t.create_date,
+			t.update_user,
+			t.update_date,
+			t.is_deleted,
+			t.status,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from bs_archive t
+		<where>
+			<if test="arCode != null and arCode != ''">
+				and t.ar_code = #{arCode}			
+			</if>
+			<if test="arName != null and arName != ''">
+				and t.ar_name = #{arName}			
+			</if>
+			<if test="arPinyin != null and arPinyin != ''">
+				and t.ar_pinyin = #{arPinyin}			
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from bs_archive t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into bs_archive
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			ar_code,
+			ar_name,
+			ar_pinyin,
+			create_user,
+			create_date,
+			update_user,
+			update_date,
+			is_deleted,
+			status,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{arCode},
+			#{arName},
+			#{arPinyin},
+			#{createUser},
+			#{createDate},
+			#{updateUser},
+			#{updateDate},
+			#{isDeleted},
+			#{status},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into bs_archive
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			ar_code,
+			ar_name,
+			ar_pinyin,
+			create_user,
+			create_date,
+			update_user,
+			update_date,
+			is_deleted,
+			status,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.arCode},
+				#{item.arName},
+				#{item.arPinyin},
+				#{item.createUser},
+				#{item.createDate},
+				#{item.updateUser},
+				#{item.updateDate},
+				#{item.isDeleted},
+				#{item.status},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update bs_archive
+		<set>
+			ar_code = #{arCode},
+			ar_name = #{arName},
+			ar_pinyin = #{arPinyin},
+			create_user = #{createUser},
+			create_date = #{createDate},
+			update_user = #{updateUser},
+			update_date = #{updateDate},
+			is_deleted = #{isDeleted},
+			status = #{status},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update bs_archive
+		<set>
+			<if test="arCode != null">
+			ar_code = #{arCode},
+			</if>
+			<if test="arName != null">
+			ar_name = #{arName},
+			</if>
+			<if test="arPinyin != null">
+			ar_pinyin = #{arPinyin},
+			</if>
+			<if test="createUser != null">
+			create_user = #{createUser},
+			</if>
+			<if test="createDate != null">
+			create_date = #{createDate},
+			</if>
+			<if test="updateUser != null">
+			update_user = #{updateUser},
+			</if>
+			<if test="updateDate != null">
+			update_date = #{updateDate},
+			</if>
+			<if test="isDeleted != null">
+			is_deleted = #{isDeleted},
+			</if>
+			<if test="status != null">
+			status = #{status},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from bs_archive where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from bs_archive where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+
+    <description>JSTL 1.1 core library</description>
+    <display-name>JSTL core</display-name>
+    <tlib-version>1.1</tlib-version>
+    <!--标签库前缀 taglib指令中的prefix属性 -->
+    <short-name>sys</short-name>
+    <!--tld文件的唯一标记 taglib指令中的uri属性 -->
+    <uri>http://sopt.tag</uri>
+
+    <tag>
+        <description>常量数值转名称</description>
+        <!-- 标签名 -->
+        <name>constantTag</name>
+        <!-- 标签类的完名 -->
+        <tag-class>com.idp.common.tag.SysConstantTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <description>常量类型</description>
+            <name>type</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>常量值</description>
+            <name>value</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>常量值</description>
+            <name>function</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>常量数值转名称</description>
+        <!-- 标签名 -->
+        <name>optionsTag</name>
+        <!-- 标签类的完名 -->
+        <tag-class>com.idp.common.tag.SysOptionsTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <description>常量类型</description>
+            <name>table</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>常量类型</description>
+            <name>fieldName</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>常量值</description>
+            <name>value</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>常量值</description>
+            <name>function</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+</taglib>

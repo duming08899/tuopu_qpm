@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idp.web.constant.dao.ConstantDao">
+
+    <parameterMap id="parameterMap" type="com.idp.web.constant.entity.Constant"></parameterMap>
+    <resultMap id="resultMap" type="com.idp.web.constant.entity.Constant">
+        <result property="id" column="id"/>
+        <result property="nameCn" column="name_cn"/>
+        <result property="nameEn" column="name_en"/>
+        <result property="value" column="value"/>
+        <result property="type" column="type"/>
+        <result property="typeDecr" column="type_decr"/>
+        <result property="createUser" column="create_user"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateUser" column="update_user"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <sql id="columnSql">
+        <trim suffixOverrides=",">
+            t.id,
+            t.name_cn,
+            t.name_en,
+            t.value,
+            t.type,
+            t.type_decr,
+            t.create_user,
+            t.create_date,
+            t.update_user,
+            t.update_date,
+            t.is_deleted,
+            t.status,
+        </trim>
+    </sql>
+
+    <select id="find" parameterMap="parameterMap" resultMap="resultMap">
+        select
+        <include refid="columnSql"></include>
+        from sys_constant t
+        <where>
+            <if test="nameCn != null and nameCn != ''">
+                and t.name_cn = #{nameCn}
+            </if>
+            <if test="nameEn != null and nameEn != ''">
+                and t.name_en = #{nameEn}
+            </if>
+            <if test="type != null and type != ''">
+                and t.type = #{type}
+            </if>
+            <if test="value != null and value != ''">
+                and t.value = #{value}
+            </if>
+        </where>
+        order by type,update_date
+    </select>
+
+    <select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+        select
+        <include refid="columnSql"></include>
+        from sys_constant t
+        where t.id = #{value}
+    </select>
+
+    <insert id="add" parameterMap="parameterMap">
+        insert into sys_constant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            name_cn,
+            name_en,
+            value,
+            type,
+            type_decr,
+            create_user,
+            create_date,
+            update_user,
+            update_date,
+            is_deleted,
+            status,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id},
+            #{nameCn},
+            #{nameEn},
+            #{value},
+            #{type},
+            #{typeDecr},
+            #{createUser},
+            #{createDate},
+            #{updateUser},
+            #{updateDate},
+            #{isDeleted},
+            #{status},
+        </trim>
+    </insert>
+
+    <insert id="batchAdd" parameterType="java.util.List">
+        insert into sys_constant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            name_cn,
+            name_en,
+            value,
+            type,
+            type_decr,
+            create_user,
+            create_date,
+            update_user,
+            update_date,
+            is_deleted,
+            status,
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.id},
+                #{item.nameCn},
+                #{item.nameEn},
+                #{item.value},
+                #{item.type},
+                #{item.typeDecr},
+                #{item.createUser},
+                #{item.createDate},
+                #{item.updateUser},
+                #{item.updateDate},
+                #{item.isDeleted},
+                #{item.status},
+            </trim>
+        </foreach>
+    </insert>
+
+    <update id="update" parameterMap="parameterMap">
+        update sys_constant
+        <set>
+            name_cn = #{nameCn},
+            name_en = #{nameEn},
+            value = #{value},
+            type = #{type},
+            type_decr = #{typeDecr},
+            create_user = #{createUser},
+            create_date = #{createDate},
+            update_user = #{updateUser},
+            update_date = #{updateDate},
+            is_deleted = #{isDeleted},
+            status = #{status},
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateNotNull" parameterMap="parameterMap">
+        update sys_constant
+        <set>
+            <if test="nameCn != null">
+                name_cn = #{nameCn},
+            </if>
+            <if test="nameEn != null">
+                name_en = #{nameEn},
+            </if>
+            <if test="value != null">
+                value = #{value},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="typeDecr != null">
+                type_decr = #{typeDecr},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+		delete from sys_constant where id = #{value}
+	</delete>
+
+    <delete id="batchDelete" parameterType="java.util.List">
+        delete from sys_constant where id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>
