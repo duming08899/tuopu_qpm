@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idp.web.sysseq.dao.SysSeqDao">
+
+	<parameterMap id="parameterMap" type="com.idp.web.sysseq.entity.SysSeq"></parameterMap>
+	<resultMap id="resultMap" type="com.idp.web.sysseq.entity.SysSeq">
+		<result property="id" column="id"/>
+		<result property="typeCode" column="type_code"/>
+		<result property="typeSeq" column="type_seq"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.type_code,
+			t.type_seq,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from sys_seq t
+		<where>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from sys_seq t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into sys_seq
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			type_code,
+			type_seq,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{typeCode},
+			#{typeSeq},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into sys_seq
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			type_code,
+			type_seq,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.typeCode},
+				#{item.typeSeq},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update sys_seq
+		<set>
+			type_code = #{typeCode},
+			type_seq = #{typeSeq},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update sys_seq
+		<set>
+			<if test="typeCode != null">
+			type_code = #{typeCode},
+			</if>
+			<if test="typeSeq != null">
+			type_seq = #{typeSeq},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from sys_seq where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from sys_seq where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

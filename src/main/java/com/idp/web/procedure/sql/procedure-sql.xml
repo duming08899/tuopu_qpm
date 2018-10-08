@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.idp.web.item.dao.ItemDao">
+<mapper namespace="com.idp.web.procedure.dao.ProcedureDao">
 
-	<parameterMap id="parameterMap" type="com.idp.web.item.entity.Item"></parameterMap>
-	<resultMap id="resultMap" type="com.idp.web.item.entity.Item">
+	<parameterMap id="parameterMap" type="com.idp.web.procedure.entity.Procedure"></parameterMap>
+	<resultMap id="resultMap" type="com.idp.web.procedure.entity.Procedure">
 		<result property="id" column="id"/>
-		<result property="itemName" column="item_name"/>
-		<result property="worklineId" column="workline_id"/>
+		<result property="procedureCode" column="procedure_code"/>
+		<result property="procedureName" column="procedure_name"/>
+		<result property="procedureNameEn" column="procedure_name_en"/>
+		<result property="procedureLeader" column="procedure_leader"/>
 		<result property="workshopId" column="workshop_id"/>
 		<result property="createUser" column="create_user"/>
 		<result property="createDate" column="create_date"/>
@@ -20,8 +22,10 @@
 	<sql id="columnSql">
 		<trim suffixOverrides=",">
 			t.id,
-			t.item_name,
-			t.workline_id,
+			t.procedure_code,
+			t.procedure_name,
+			t.procedure_name_en,
+			t.procedure_leader,
 			t.workshop_id,
 			t.create_user,
 			t.create_date,
@@ -36,34 +40,41 @@
 	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
 		select
 			<include refid="columnSql"></include>
-		from bs_item t
+		from bs_procedure t
 		<where>
-			<if test="itemName != null and itemName != ''">
-				and t.item_name = #{itemName}			
+			<if test="procedureCode != null and procedureCode != ''">
+				and t.procedure_code = #{procedureCode}			
 			</if>
-			<if test="worklineId != null and worklineId != ''">
-				and t.workline_id = #{worklineId}			
+			<if test="procedureName != null and procedureName != ''">
+				and t.procedure_name = #{procedureName}			
+			</if>
+			<if test="procedureNameEn != null and procedureNameEn != ''">
+				and t.procedure_name_en = #{procedureNameEn}			
+			</if>
+			<if test="procedureLeader != null and procedureLeader != ''">
+				and t.procedure_leader = #{procedureLeader}			
 			</if>
 			<if test="workshopId != null and workshopId != ''">
 				and t.workshop_id = #{workshopId}			
 			</if>
 		</where>
-		order by workshop_id ,workline_id
 	</select>
 	
 	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
 		select
 			<include refid="columnSql"></include>
-		from bs_item t
+		from bs_procedure t
 		where t.id = #{value}
 	</select>
 	
 	<insert id="add" parameterMap="parameterMap">
-		insert into bs_item
+		insert into bs_procedure
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			id,
-			item_name,
-			workline_id,
+			procedure_code,
+			procedure_name,
+			procedure_name_en,
+			procedure_leader,
 			workshop_id,
 			create_user,
 			create_date,
@@ -75,8 +86,10 @@
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			#{id},
-			#{itemName},
-			#{worklineId},
+			#{procedureCode},
+			#{procedureName},
+			#{procedureNameEn},
+			#{procedureLeader},
 			#{workshopId},
 			#{createUser},
 			#{createDate},
@@ -89,11 +102,13 @@
 	</insert>
 	
 	<insert id="batchAdd" parameterType="java.util.List">
-		insert into bs_item
+		insert into bs_procedure
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			id,
-			item_name,
-			workline_id,
+			procedure_code,
+			procedure_name,
+			procedure_name_en,
+			procedure_leader,
 			workshop_id,
 			create_user,
 			create_date,
@@ -107,8 +122,10 @@
 		<foreach collection="list" item="item" separator=",">
 			<trim prefix="(" suffix=")" suffixOverrides=",">
 				#{item.id},
-				#{item.itemName},
-				#{item.worklineId},
+				#{item.procedureCode},
+				#{item.procedureName},
+				#{item.procedureNameEn},
+				#{item.procedureLeader},
 				#{item.workshopId},
 				#{item.createUser},
 				#{item.createDate},
@@ -122,10 +139,12 @@
 	</insert>
 	
 	<update id="update" parameterMap="parameterMap">
-		update bs_item
+		update bs_procedure
 		<set>
-			item_name = #{itemName},
-			workline_id = #{worklineId},
+			procedure_code = #{procedureCode},
+			procedure_name = #{procedureName},
+			procedure_name_en = #{procedureNameEn},
+			procedure_leader = #{procedureLeader},
 			workshop_id = #{workshopId},
 			create_user = #{createUser},
 			create_date = #{createDate},
@@ -139,13 +158,19 @@
 	</update>
 	
 	<update id="updateNotNull" parameterMap="parameterMap">
-		update bs_item
+		update bs_procedure
 		<set>
-			<if test="itemName != null">
-			item_name = #{itemName},
+			<if test="procedureCode != null">
+			procedure_code = #{procedureCode},
 			</if>
-			<if test="worklineId != null">
-			workline_id = #{worklineId},
+			<if test="procedureName != null">
+			procedure_name = #{procedureName},
+			</if>
+			<if test="procedureNameEn != null">
+			procedure_name_en = #{procedureNameEn},
+			</if>
+			<if test="procedureLeader != null">
+			procedure_leader = #{procedureLeader},
 			</if>
 			<if test="workshopId != null">
 			workshop_id = #{workshopId},
@@ -176,11 +201,11 @@
 	</update>
 	
 	<delete id="delete" parameterType="java.lang.String">
-		delete from bs_item where id = #{value}
+		delete from bs_procedure where id = #{value}
 	</delete>
 	
 	<delete id="batchDelete" parameterType="java.util.List">
-		delete from bs_item where id in
+		delete from bs_procedure where id in
 		<foreach collection="list" item="item" open="(" close=")" separator=",">
 			#{item}
 		</foreach>

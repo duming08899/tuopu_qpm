@@ -23,9 +23,7 @@
                 <td>${item.itemName}</td>
                 <td>${item.updateUser}</td>
                 <td><fmt:formatDate value="${item.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                <td>
-                    <sys:constantTag type="status" value="${item.status}" function="V"/>
-                </td>
+                <td><sys:constantTag type="status" value="${item.status}" function="V"/></td>
                 <td>
                     <a href="javascript:;" class="btn btn-sm blue" onclick="update('/item/item?id=${item.id}')">
                         <i class="fa fa-edit"></i>编辑
