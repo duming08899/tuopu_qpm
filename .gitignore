@@ -1,0 +1,12 @@
+##############################
+## Folders                  ##
+##############################
+target
+out
+
+##############################
+## Netbeans conf            ##
+##############################
+nb-configuration.xml
+nbactions.xml
+.idea/workspace.xml

@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.idp.web.item.dao.ItemDao">
 
+	<cache />
+
 	<parameterMap id="parameterMap" type="com.idp.web.item.entity.Item"></parameterMap>
 	<resultMap id="resultMap" type="com.idp.web.item.entity.Item">
 		<result property="id" column="id"/>

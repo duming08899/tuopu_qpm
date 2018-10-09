@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.idp.web.workline.dao.WorklineDao">
 
+	<cache />
+
 	<parameterMap id="parameterMap" type="com.idp.web.workline.entity.Workline"></parameterMap>
 	<resultMap id="resultMap" type="com.idp.web.workline.entity.Workline">
 		<result property="id" column="id"/>
