@@ -112,7 +112,7 @@ public class SysMenuController extends BaseController {
 	 */
 	@RequestMapping("/getMenuForTree")
 	@ResponseBody
-	public String getMenuForTree(Long currentId){
+	public String getMenuForTree(){
 		JSONArray json = new JSONArray();
 		
 		List<SysMenu> menuList = sysMenuService.find(new SysMenu());

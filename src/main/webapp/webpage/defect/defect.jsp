@@ -21,13 +21,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-3 control-label">缺陷分类:</label>
+                <label class="col-md-3 control-label">缺陷部门:</label>
                 <div class="col-md-4">
                     <div class="input-icon right">
                         <i class="fa"></i>
                         <select id="defectTypeId" name="defectTypeId" class="form-control">
                             <option value="">请选择</option>
-                            <sys:constantTag type="DEFECT_TYPE" value="" function="O"/>
+                            <sys:optionsTag table="sysOrg" fieldName="orgName" function="O"/>
                         </select>
                     </div>
                 </div>

@@ -1,14 +1,14 @@
-package com.idp.web.material.dao;
-import com.idp.web.material.entity.Material;
+package com.idp.web.product.dao;
+import com.idp.web.product.entity.Product;
 import com.idp.common.base.BaseDao;
 
 /**
  * 
- * 原材料管理dao接口.
+ * 商品dao接口.
  * 
  * <pre>
  * 	历史记录：
- * 	2018-10-07 duming
+ * 	2018-10-10 duming
  * 	新建文件
  * </pre>
  * 
@@ -27,7 +27,7 @@ import com.idp.common.base.BaseDao;
  * <p/> $Id$
  *
  */
-public interface MaterialDao extends BaseDao<Material, String> {
+public interface ProductDao extends BaseDao<Product, String> {
 
 
 }

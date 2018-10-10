@@ -1,8 +1,9 @@
-package com.idp.web.material.controller;
+package com.idp.web.product.controller;
 
 import com.idp.common.constant.SeqTypeAttr;
-import com.idp.web.material.entity.Material;
-import com.idp.web.material.service.MaterialService;
+import com.idp.common.util.SeqUtil;
+import com.idp.web.product.entity.Product;
+import com.idp.web.product.service.ProductService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -21,11 +22,11 @@ import net.sf.json.JSONObject;
 import java.util.Date;
 
 /**
- * 原材料管理controller
+ * 商品controller
  *
  * <pre>
  * 	历史记录：
- * 	2018-10-07 duming
+ * 	2018-10-10 duming
  * 	新建文件
  * </pre>
  *
@@ -43,17 +44,17 @@ import java.util.Date;
  * <p/> $Id$
  */
 @Controller
-@RequestMapping("/material")
-public class MaterialController extends BaseController {
+@RequestMapping("/product")
+public class ProductController extends BaseController {
 
-    private Logger logger = Logger.getLogger(MaterialController.class);
+    private Logger logger = Logger.getLogger(ProductController.class);
 
     @Resource
-    private MaterialService materialService;
+    private ProductService productService;
 
     /**
      * <pre>
-     * 	2018-10-07 duming
+     * 	2018-10-10 duming
      * 	初始化查询页面
      * </pre>
      *
@@ -61,33 +62,33 @@ public class MaterialController extends BaseController {
      */
     @RequestMapping("/init")
     public String init() {
-        return "material/materialSearch";
+        return "product/productSearch";
     }
 
     /**
      * <pre>
-     * 	2018-10-07 duming
+     * 	2018-10-10 duming
      * 	分页查询
      * </pre>
      *
-     * @param material
+     * @param product
      * @param page
      * @param request
      * @return
      */
     @RequestMapping("/list")
-    public String list(Material material, Page<Material> page, HttpServletRequest request) {
+    public String list(Product product, Page<Product> page, HttpServletRequest request) {
         try {
-            request.setAttribute("page", materialService.findByPage(material, page));
+            request.setAttribute("page", productService.findByPage(product, page));
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
-        return "material/materialList";
+        return "product/productList";
     }
 
     /**
      * <pre>
-     * 	2018-10-07 duming
+     * 	2018-10-10 duming
      * 	新增修改页面初始化
      * </pre>
      *
@@ -95,47 +96,48 @@ public class MaterialController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping("/material")
-    public String material(String id, HttpServletRequest request) {
+    @RequestMapping("/product")
+    public String product(String id, HttpServletRequest request) {
         try {
-            setAttributeSeq(SeqTypeAttr.YLGL, request);
             if (ValidateUtils.isNotEmpty(id)) {
-                Material material = materialService.getById(id);
-                request.setAttribute("material", material);
+                Product product = productService.getById(id);
+                request.setAttribute("product", product);
+            } else {
+                setAttributeSeq(SeqTypeAttr.SP, request);
             }
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
-        return "material/material";
+        return "product/product";
     }
 
     /**
      * <pre>
-     * 	2018-10-07 duming
+     * 	2018-10-10 duming
      * 	保存
      * </pre>
      *
-     * @param material
+     * @param product
      * @return
      */
     @RequestMapping("/save")
     @ResponseBody
-    public String save(Material material) {
+    public String save(Product product) {
         JSONObject json = new JSONObject();
         try {
             // 修改
-            if (ValidateUtils.isNotEmpty(material.getId())) {
-                material.setUpdateUser(getCurrentUser().getUsername());
-                material.setUpdateDate(new Date());
-                materialService.update(material);
+            if (ValidateUtils.isNotEmpty(product.getId())) {
+                product.setUpdateUser(getCurrentUser().getUsername());
+                product.setUpdateDate(new Date());
+                productService.update(product);
             }
             // 新增
             else {
-                material.setUpdateUser(getCurrentUser().getUsername());
-                material.setUpdateDate(new Date());
-                material.setCreateUser(getCurrentUser().getUsername());
-                material.setCreateDate(new Date());
-                materialService.add(material);
+                product.setUpdateUser(getCurrentUser().getUsername());
+                product.setUpdateDate(new Date());
+                product.setCreateUser(getCurrentUser().getUsername());
+                product.setCreateDate(new Date());
+                productService.add(product);
             }
             json.put("result", "save_success");
         } catch (Exception e) {
@@ -147,7 +149,7 @@ public class MaterialController extends BaseController {
 
     /**
      * <pre>
-     * 	2018-10-07 duming
+     * 	2018-10-10 duming
      * 	删除
      * </pre>
      *
@@ -159,7 +161,7 @@ public class MaterialController extends BaseController {
     public String delete(String id) {
         JSONObject json = new JSONObject();
         try {
-            materialService.delete(id);
+            productService.delete(id);
             json.put("result", "delete_success");
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

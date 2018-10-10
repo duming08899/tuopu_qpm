@@ -21,9 +21,8 @@
                 <td>${vs.count + page.offset}</td>
                 <td>
                     <c:if test="${constant.type==10}">启用状态</c:if>
-                    <c:if test="${constant.type==20}">原材料单位</c:if>
-                    <c:if test="${constant.type==30}">原材料类型</c:if>
-                    <c:if test="${constant.type==40}">缺陷类型</c:if>
+                    <c:if test="${constant.type==20}">计量单位</c:if>
+                    <c:if test="${constant.type==30}">商品类型</c:if>
                 </td>
                 <td>${constant.nameCn}</td>
                 <td>${constant.nameEn}</td>

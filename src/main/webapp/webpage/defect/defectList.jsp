@@ -7,7 +7,7 @@
             <th>#</th>
             <th>缺陷名称</th>
             <th>缺陷名称(英文)</th>
-            <th>缺陷分类</th>
+            <th>缺陷部门</th>
             <th>操作人</th>
             <th>操作时间</th>
             <th>状态</th>
@@ -20,7 +20,7 @@
                 <td>${vs.count + page.offset}</td>
                 <td>${defect.defectName}</td>
                 <td>${defect.defectNameEn}</td>
-                <td><sys:constantTag type="DEFECT_TYPE" value="${defect.defectTypeId}" function="V"/></td>
+                <td><sys:optionsTag table="sysOrg" fieldName="orgName" value="${defect.defectTypeId}" function="V"/></td>
                 <td>${defect.updateUser}</td>
                 <td><fmt:formatDate value="${defect.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td><sys:constantTag type="status" value="${defect.status}" function="V"/></td>

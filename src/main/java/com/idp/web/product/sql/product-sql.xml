@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idp.web.product.dao.ProductDao">
+    <cache/>
+
+    <parameterMap id="parameterMap" type="com.idp.web.product.entity.Product"></parameterMap>
+    <resultMap id="resultMap" type="com.idp.web.product.entity.Product">
+        <result property="id" column="id"/>
+        <result property="productCode" column="product_code"/>
+        <result property="productType" column="product_type"/>
+        <result property="productName" column="product_name"/>
+        <result property="productUnit" column="product_unit"/>
+        <result property="productStandard" column="product_standard"/>
+        <result property="productPlace" column="product_place"/>
+        <result property="productBrand" column="product_brand"/>
+        <result property="productColor" column="product_color"/>
+        <result property="productPrice" column="product_price"/>
+        <result property="productSource" column="product_source"/>
+        <result property="isBom" column="is_bom"/>
+        <result property="createUser" column="create_user"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateUser" column="update_user"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="status" column="status"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="columnSql">
+        <trim suffixOverrides=",">
+            t.id,
+            t.product_code,
+            t.product_type,
+            t.product_name,
+            t.product_unit,
+            t.product_standard,
+            t.product_place,
+            t.product_brand,
+            t.product_color,
+            t.product_price,
+            t.product_source,
+            t.is_bom,
+            t.create_user,
+            t.create_date,
+            t.update_user,
+            t.update_date,
+            t.is_deleted,
+            t.status,
+            t.remark,
+        </trim>
+    </sql>
+
+    <select id="find" parameterMap="parameterMap" resultMap="resultMap">
+        select
+        <include refid="columnSql"></include>
+        from bs_product t
+        <where>
+            <if test="productCode != null and productCode != ''">
+                and t.product_code = #{productCode}
+            </if>
+            <if test="productType != null and productType != ''">
+                and t.product_type = #{productType}
+            </if>
+            <if test="productName != null and productName != ''">
+                and t.product_name = #{productName}
+            </if>
+            <if test="productSource != null and productSource != ''">
+                and t.product_source = #{productSource}
+            </if>
+        </where>
+    </select>
+
+    <select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+        select
+        <include refid="columnSql"></include>
+        from bs_product t
+        where t.id = #{value}
+    </select>
+
+    <insert id="add" parameterMap="parameterMap">
+        insert into bs_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            product_code,
+            product_type,
+            product_name,
+            product_unit,
+            product_standard,
+            product_place,
+            product_brand,
+            product_color,
+            product_price,
+            product_source,
+            is_bom,
+            create_user,
+            create_date,
+            update_user,
+            update_date,
+            is_deleted,
+            status,
+            remark,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id},
+            #{productCode},
+            #{productType},
+            #{productName},
+            #{productUnit},
+            #{productStandard},
+            #{productPlace},
+            #{productBrand},
+            #{productColor},
+            #{productPrice},
+            #{productSource},
+            #{isBom},
+            #{createUser},
+            #{createDate},
+            #{updateUser},
+            #{updateDate},
+            #{isDeleted},
+            #{status},
+            #{remark},
+        </trim>
+    </insert>
+
+    <insert id="batchAdd" parameterType="java.util.List">
+        insert into bs_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            product_code,
+            product_type,
+            product_name,
+            product_unit,
+            product_standard,
+            product_place,
+            product_brand,
+            product_color,
+            product_price,
+            product_source,
+            is_bom,
+            create_user,
+            create_date,
+            update_user,
+            update_date,
+            is_deleted,
+            status,
+            remark,
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.id},
+                #{item.productCode},
+                #{item.productType},
+                #{item.productName},
+                #{item.productUnit},
+                #{item.productStandard},
+                #{item.productPlace},
+                #{item.productBrand},
+                #{item.productColor},
+                #{item.productPrice},
+                #{item.productSource},
+                #{item.isBom},
+                #{item.createUser},
+                #{item.createDate},
+                #{item.updateUser},
+                #{item.updateDate},
+                #{item.isDeleted},
+                #{item.status},
+                #{item.remark},
+            </trim>
+        </foreach>
+    </insert>
+
+    <update id="update" parameterMap="parameterMap">
+        update bs_product
+        <set>
+            product_code = #{productCode},
+            product_type = #{productType},
+            product_name = #{productName},
+            product_unit = #{productUnit},
+            product_standard = #{productStandard},
+            product_place = #{productPlace},
+            product_brand = #{productBrand},
+            product_color = #{productColor},
+            product_price = #{productPrice},
+            product_source = #{productSource},
+            is_bom = #{isBom},
+            create_user = #{createUser},
+            create_date = #{createDate},
+            update_user = #{updateUser},
+            update_date = #{updateDate},
+            is_deleted = #{isDeleted},
+            status = #{status},
+            remark = #{remark},
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateNotNull" parameterMap="parameterMap">
+        update bs_product
+        <set>
+            <if test="productCode != null">
+                product_code = #{productCode},
+            </if>
+            <if test="productType != null">
+                product_type = #{productType},
+            </if>
+            <if test="productName != null">
+                product_name = #{productName},
+            </if>
+            <if test="productUnit != null">
+                product_unit = #{productUnit},
+            </if>
+            <if test="productStandard != null">
+                product_standard = #{productStandard},
+            </if>
+            <if test="productPlace != null">
+                product_place = #{productPlace},
+            </if>
+            <if test="productBrand != null">
+                product_brand = #{productBrand},
+            </if>
+            <if test="productColor != null">
+                product_color = #{productColor},
+            </if>
+            <if test="productPrice != null">
+                product_price = #{productPrice},
+            </if>
+            <if test="productSource != null">
+                product_source = #{productSource},
+            </if>
+            <if test="isBom != null">
+                is_bom = #{isBom},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+		delete from bs_product where id = #{value}
+	</delete>
+
+    <delete id="batchDelete" parameterType="java.util.List">
+        delete from bs_product where id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

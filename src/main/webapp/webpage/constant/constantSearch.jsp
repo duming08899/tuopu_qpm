@@ -16,9 +16,8 @@
                 <select name="type" class="form-control">
                     <option value="">全部</option>
                     <option value="10">启用状态</option>
-                    <option value="20">原材料单位</option>
-                    <option value="30">原材料类型</option>
-                    <option value="40">原材料类型</option>
+                    <option value="20">计量单位</option>
+                    <option value="30">商品类型</option>
                 </select>
             </div>
         </form>

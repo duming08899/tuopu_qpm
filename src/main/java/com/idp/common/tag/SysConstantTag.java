@@ -46,7 +46,7 @@ public class SysConstantTag extends SimpleTagSupport {
     /**
      * 常量类型 启用状态
      */
-    private static final String TAG_MATERIAL_TYPE = "MATERIAL_TYPE";
+    private static final String TAG_PRODUCT_TYPE = "P_TYPE";
 
 
     /**
@@ -78,8 +78,8 @@ public class SysConstantTag extends SimpleTagSupport {
     static {
         //原材料单位
         constantMap.put(TAG_DEFECT_TYPE, 40);
-        //原材料单位
-        constantMap.put(TAG_MATERIAL_TYPE, 30);
+        //产品类型
+        constantMap.put(TAG_PRODUCT_TYPE, 30);
         //原材料单位
         constantMap.put(TAG_TYPE_UNIT, 20);
         //状态

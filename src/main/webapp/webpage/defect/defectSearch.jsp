@@ -15,7 +15,7 @@
                 <label for="defectTypeId" class="control-label">缺陷分类：</label>
                 <select name="defectTypeId" class="form-control">
                     <option value="">全部</option>
-                    <sys:constantTag type="DEFECT_TYPE" value="" function="O"/>
+                    <td><sys:optionsTag table="sysOrg" fieldName="orgName" function="O"/></td>
                 </select>
             </div>
         </form>

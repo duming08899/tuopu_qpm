@@ -9,7 +9,9 @@
             <th>工序名称</th>
             <th>工艺名称英文</th>
             <th>负责人</th>
+            <!--
             <th>生产车间</th>
+            -->
             <th>操作人</th>
             <th>操作时间</th>
             <th>状态</th>
@@ -24,7 +26,9 @@
                 <td>${procedure.procedureName}</td>
                 <td>${procedure.procedureNameEn}</td>
                 <td>${procedure.procedureLeader}</td>
+                <!--
                 <td><sys:optionsTag table="workshop" fieldName="workshopName" value="${procedure.workshopId}" function="V"/></td>
+                -->
                 <td>${procedure.updateUser}</td>
                 <td><fmt:formatDate value="${procedure.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td>

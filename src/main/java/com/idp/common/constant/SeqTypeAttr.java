@@ -7,7 +7,8 @@ package com.idp.common.constant;
  */
 public enum SeqTypeAttr {
 
-    YLGL("YLGL");
+    YLGL("YLGL"),
+    SP("SP");
 
 
     private SeqTypeAttr(String name) {

@@ -32,6 +32,7 @@
                     <input type="text" name="procedureLeader" class="form-control" value="${procedure.procedureLeader}" maxlength="50"/>
                 </div>
             </div>
+            <!--
             <div class="form-group">
                 <label class="col-md-3 control-label">生产车间:</label>
                 <div class="col-md-4">
@@ -44,6 +45,7 @@
                     </div>
                 </div>
             </div>
+            -->
             <div class="form-group">
                 <label class="col-md-3 control-label">备注:</label>
                 <div class="col-md-4">

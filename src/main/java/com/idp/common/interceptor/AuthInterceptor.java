@@ -62,7 +62,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         String requestPath = getRequestPath(request);// 用户访问的资源地址
         HttpSession session = request.getSession();
 
-        logger.info("requestPath:" + requestPath);
+        //logger.info("requestPath:" + requestPath);
 
         String authorization = request.getHeader("Authorization");
 

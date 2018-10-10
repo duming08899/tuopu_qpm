@@ -11,13 +11,8 @@
             <div class="form-group">
                 <label class="col-md-3 control-label">原材料编码:</label>
                 <div class="col-md-4">
-
-                    <c:if test="${material!=null}">
-                        <input type="text" name="materialCode" class="form-control" value="${material.materialCode}" maxlength="17"/>
-                    </c:if>
-                    <c:if test="${material==null}">
-                        <input type="text" name="materialCode" class="form-control" value="${code}" maxlength="17"/>
-                    </c:if>
+                    <input type="text" name="materialCode" class="form-control" value="${material.materialCode}"
+                           maxlength="14"/>
                 </div>
             </div>
             <div class="form-group">

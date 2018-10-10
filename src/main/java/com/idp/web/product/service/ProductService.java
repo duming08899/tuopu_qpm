@@ -1,16 +1,16 @@
-package com.idp.web.material.service;
-import com.idp.web.material.entity.Material;
+package com.idp.web.product.service;
+import com.idp.web.product.entity.Product;
 import java.util.List;
 
 import com.idp.common.persistence.Page;
 
 /**
  * 
- * 原材料管理service接口
+ * 商品service接口
  * 
  * <pre>
  * 	历史记录：
- * 	2018-10-07 duming
+ * 	2018-10-10 duming
  * 	新建文件
  * </pre>
  * 
@@ -29,71 +29,71 @@ import com.idp.common.persistence.Page;
  * <p/> $Id$
  *
  */
-public interface MaterialService{
+public interface ProductService{
 	
  	/**
 	 * 
 	 * <pre>
-	 * 	2018-10-07 duming
+	 * 	2018-10-10 duming
 	 * 	分页查询
 	 * </pre>
 	 * 
-	 * @param material
+	 * @param product
 	 * @param page
 	 * @return
 	 */
-	public Page<Material> findByPage(Material material,Page<Material> page);
+	public Page<Product> findByPage(Product product,Page<Product> page);
 	
 	/**
 	 * 
 	 * <pre>
-	 * 	2018-10-07 duming
+	 * 	2018-10-10 duming
 	 * 	查询
 	 * </pre>
 	 * 
-	 * @param material
+	 * @param product
 	 * @return
 	 */
-	public List<Material> findBySearch(Material material);
+	public List<Product> findBySearch(Product product);
 	
 	/**
 	 * 
 	 * <pre>
-	 * 	2018-10-07 duming
+	 * 	2018-10-10 duming
 	 * 	通过ID查询
 	 * </pre>
 	 * 
-	 * @param Material
+	 * @param Product
 	 * @return
 	 */
-	public Material getById(String id);
+	public Product getById(String id);
 	
 	/**
 	 * 
 	 * <pre>
-	 * 	2018-10-07 duming
+	 * 	2018-10-10 duming
 	 * 	新增
 	 * </pre>
 	 * 
-	 * @param material
+	 * @param product
 	 */
-	public void add(Material material);
+	public void add(Product product);
 	
 	/**
 	 * 
 	 * <pre>
-	 * 	2018-10-07 duming
+	 * 	2018-10-10 duming
 	 * 	修改
 	 * </pre>
 	 * 
-	 * @param material
+	 * @param product
 	 */
-	public void update(Material material);
+	public void update(Product product);
 	
 	/**
 	 * 
 	 * <pre>
-	 * 	2018-10-07 duming
+	 * 	2018-10-10 duming
 	 * 	删除
 	 * </pre>
 	 * 
